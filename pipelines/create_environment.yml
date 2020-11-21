@@ -30,4 +30,4 @@ jobs:
           RESOURCE_GROUP: $(aml-resource-group)
           SUBSCRIPTION_ID: $(aml-subscription-id)
           AZURE_STORAGE_ACCOUNT_NAME: $(storage-account-name)
-          AZURE_STORAGE_ACCOUNT_KEY: $(tempdatasetsa-account-key)
+          AZURE_STORAGE_ACCOUNT_KEY: $(storage-account-key)
