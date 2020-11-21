@@ -1,0 +1,25 @@
+jobs:
+  - job: "deployment_pipeline_job"
+    steps:
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: "3.7"
+          architecture: "x64"
+
+      - script: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+        displayName: "Install requirements"
+
+      - script: |
+          python -m src.mbs.deploy_aml_model
+        displayName: "Deploy AML Model to ACI Web Service"
+        env:
+          TENANT_ID: $(tenant-id)
+          SPN_ID: $(aml-client-id)
+          SPN_PASSWORD: $(aml-client-secret)
+          AML_WORKSPACE_NAME: $(aml-workspace-name)
+          RESOURCE_GROUP: $(aml-resource-group)
+          SUBSCRIPTION_ID: $(aml-subscription-id)
+          AZURE_STORAGE_ACCOUNT_NAME: $(storage-account-name)
+          AZURE_STORAGE_ACCOUNT_KEY: $(tempdatasetsa-account-key)
